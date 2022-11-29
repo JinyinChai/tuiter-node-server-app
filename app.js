@@ -8,6 +8,19 @@ import UserController
 import TuitsController
     from "./controllers/tuits/tuits-controller.js";
 
+import mongoose from "mongoose";
+// mongoose.connect('mongodb://localhost:27017/tuiter');
+//"mongodb+srv://Alex:supersecretpassword@cluster0.5rswrjk.mongodb.net/?retryWrites=true&w=majority"
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING
+||'mongodb://127.0.0.1:27017/tuiter';
+    // || 'mongodb://localhost:27017/tuiter';
+
+mongoose.connect(CONNECTION_STRING)
+    .then(()=>console.log("DBConnection Successful")).catch((err)=> {
+    console.log(err);
+});
+// mongoose.connect(CONNECTION_STRING);
+
 const app = express()
 app.use(cors())
 app.use(express.json());
